@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LinkLite - URL History</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .animate-fade-in {
+            animation: fade-in 0.6s ease-out;
+        }
+        @keyframes fade-in {
+            from { opacity: 0; transform: translateY(15px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .hover-scale:hover {
+            transform: scale(1.02);
+            transition: transform 0.3s ease-in-out;
+        }
+        .copy-button:hover {
+            background-color: #2563eb;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 flex flex-col min-h-screen font-sans antialiased">
+    <header class="bg-white shadow-sm py-4 sticky top-0 z-10">
+        <div class="container mx-auto px-4 flex justify-between items-center">
+            <h1 class="text-2xl font-bold text-gray-800">LinkLite</h1>
+            <nav>
+                <a href="{{ url_for('home') }}" class="text-gray-600 hover:text-blue-600 font-medium px-4 py-2 rounded-md transition">Home</a>
+            </nav>
+        </div>
+    </header>
+    <main class="flex-grow container mx-auto px-4 py-16">
+        <section class="text-center mb-12 animate-fade-in">
+            <h2 class="text-3xl md:text-4xl font-extrabold text-gray-900 mb-3">Your URL History</h2>
+            <p class="text-lg text-gray-500 max-w-xl mx-auto">View and manage all your shortened URLs in one place.</p>
+        </section>
+        <div class="bg-white p-8 rounded-2xl shadow-lg max-w-4xl mx-auto animate-fade-in">
+            {% if urls %}
+                <div class="space-y-4">
+                    {% for url in urls %}
+                        <div class="border-b border-gray-200 pb-4 hover-scale">
+                            <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+                                <div>
+                                    <p class="text-sm text-gray-500">Original URL</p>
+                                    <a href="{{ url.original_url }}" class="text-blue-600 hover:underline text-base font-medium break-all" target="_blank">{{ url.original_url | truncate(60, True, '...') }}</a>
+                                </div>
+                                <div>
+                                    <p class="text-sm text-gray-500">Short URL</p>
+                                    <div class="flex items-center gap-2">
+                                        <a href="{{ url_for('redirect_short_url', short_code=url.short_code, _external=True) }}" class="text-blue-600 hover:underline text-base font-medium">{{ request.host_url }}{{ url.short_code }}</a>
+                                        <button onclick="navigator.clipboard.writeText('{{ request.host_url }}{{ url.short_code }}'); alert('Copied to clipboard!');" class="bg-blue-600 text-white px-3 py-1 rounded-md text-sm copy-button transition">Copy</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% else %}
+                <p class="text-gray-500 text-center">No URLs have been shortened yet. <a href="{{ url_for('home') }}" class="text-blue-600 hover:underline">Shorten one now!</a></p>
+            {% endif %}
+        </div>
+    </main>
+    <footer class="bg-gray-800 text-gray-300 py-6">
+        <div class="container mx-auto px-4 text-center">
+            <p class="text-sm">&copy; {{ current_year }} LinkLite. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>

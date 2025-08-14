@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block title %}LinkLite - Shortened URL{% endblock %}
+{% block content %}
+<section class="text-center mb-12 animate-fade-in">
+    <h2 class="text-3xl md:text-4xl font-extrabold text-gray-900 mb-3">Your Shortened URL</h2>
+    <p class="text-lg text-gray-500 max-w-xl mx-auto">Here is your shortened URL, ready to share!</p>
+</section>
+<div class="bg-white p-8 rounded-2xl shadow-lg max-w-md mx-auto hover-scale">
+    <div class="relative">
+        <input type="text" value="{{ short_url }}" readonly class="w-full p-4 border border-gray-200 rounded-lg text-gray-700 bg-gray-50 input-focus">
+        <span class="absolute inset-y-0 right-3 flex items-center text-gray-400">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"></path>
+            </svg>
+        </span>
+    </div>
+    <button onclick="navigator.clipboard.writeText('{{ short_url }}'); alert('Copied to clipboard!');" class="mt-6 w-full bg-blue-600 text-white py-3 rounded-lg hover:bg-blue-700 transition font-medium tracking-wide copy-button">Copy to Clipboard</button>
+    <a href="{{ url_for('home') }}" class="mt-4 inline-block text-blue-600 hover:underline text-center w-full">Shorten Another URL</a>
+</div>
+{% endblock %}

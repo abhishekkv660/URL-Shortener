@@ -1,0 +1,11 @@
+
+version: '3'
+services:
+  web:
+    build: .
+    ports:
+      - "5000:5000"
+    restart: unless-stopped
+    # Uncomment to persist SQLite outside the container (optional)
+    # volumes:
+    #   - ./data.db:/app/data.db

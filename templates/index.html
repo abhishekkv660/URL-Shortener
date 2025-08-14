@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% block title %}LinkLite - Simplify Your Links{% endblock %}
+{% block content %}
+<section class="text-center mb-12 animate-fade-in">
+    <h2 class="text-3xl md:text-4xl font-extrabold text-gray-900 mb-3">Simplify Your Links</h2>
+    <p class="text-lg text-gray-500 max-w-xl mx-auto">Create concise, shareable URLs effortlessly. Perfect for professionals, marketers, and creators.</p>
+</section>
+<div class="bg-white p-8 rounded-2xl shadow-lg max-w-md mx-auto hover-scale">
+    <form method="POST" action="{{ url_for('home') }}">
+        <div class="relative">
+            <input type="url" name="original_url" placeholder="Enter your long URL" class="w-full p-4 border border-gray-200 rounded-lg text-gray-700 input-focus" required>
+            <span class="absolute inset-y-0 right-3 flex items-center text-gray-400">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"></path>
+                </svg>
+            </span>
+        </div>
+        <button type="submit" class="mt-6 w-full bg-blue-600 text-white py-3 rounded-lg hover:bg-blue-700 transition font-medium tracking-wide">Shorten URL</button>
+    </form>
+</div>
+<section class="mt-16 grid grid-cols-1 sm:grid-cols-3 gap-6 max-w-4xl mx-auto">
+    <div class="bg-white p-6 rounded-lg shadow-sm text-center animate-fade-in" style="animation-delay: 0.1s;">
+        <svg class="w-8 h-8 mx-auto mb-3 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+        </svg>
+        <h4 class="text-lg font-semibold text-gray-800 mb-2">Lightning Fast</h4>
+        <p class="text-gray-500 text-sm">Generate short URLs in milliseconds.</p>
+    </div>
+    <div class="bg-white p-6 rounded-lg shadow-sm text-center animate-fade-in" style="animation-delay: 0.2s;">
+        <svg class="w-8 h-8 mx-auto mb-3 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>
+        </svg>
+        <h4 class="text-lg font-semibold text-gray-800 mb-2">Secure</h4>
+        <p class="text-gray-500 text-sm">Safe and reliable link redirection.</p>
+    </div>
+    <div class="bg-white p-6 rounded-lg shadow-sm text-center animate-fade-in" style="animation-delay: 0.3s;">
+        <svg class="w-8 h-8 mx-auto mb-3 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path>
+        </svg>
+        <h4 class="text-lg font-semibold text-gray-800 mb-2">Track History</h4>
+        <p class="text-gray-500 text-sm">Access all your shortened links anytime.</p>
+    </div>
+</section>
+{% endblock %}
